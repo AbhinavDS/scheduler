@@ -1,0 +1,8 @@
+{{extend 'layout.html'}}
+<h1>{{=message}}</h1><br>
+<button onclick="myFunction()">Add New Table</button>
+<script>
+function myFunction() {
+    var myWindow = window.open("mainpage.html", "_self");
+}
+</script>

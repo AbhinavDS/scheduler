@@ -1,0 +1,17 @@
+{{extend 'layout.html'}}
+
+<h1>{{=message0}}</h1><br>
+<h1>{{=message1}}</h1><br>
+<h1>{{=message2[0][0]}}</h1><br>
+<h1>{{=mes1[0]}} {{=mes2[0]}}</h1><br>
+<h1>{{=mes1[1]}} {{=mes2[1]}}</h1><br>
+<h1>{{=message2[1][0]}}</h1><br>
+<h1>{{=mes1[2]}} {{=mes2[2]}}</h1><br>
+<h1>{{=mes1[3]}} {{=mes2[3]}}</h1><br>
+
+<button onclick="myFunction()">Create New Table</button>
+<script>
+function myFunction() {
+    var myWindow = window.open("create_table.html", "_self");
+}
+</script>

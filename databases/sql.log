@@ -1,0 +1,232 @@
+timestamp: 2014-05-18T13:47:47.897953
+CREATE TABLE auth_user(
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(128),
+    last_name VARCHAR(128),
+    email VARCHAR(512),
+    password VARCHAR(512),
+    registration_key VARCHAR(512),
+    reset_password_key VARCHAR(512),
+    registration_id VARCHAR(512)
+);
+timestamp: 2014-05-18T13:57:04.323617
+CREATE TABLE auth_user(
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(128),
+    last_name VARCHAR(128),
+    email VARCHAR(512),
+    password VARCHAR(512),
+    registration_key VARCHAR(512),
+    reset_password_key VARCHAR(512),
+    registration_id VARCHAR(512)
+);
+success!
+timestamp: 2014-05-18T13:57:04.458577
+CREATE TABLE auth_group(
+    id SERIAL PRIMARY KEY,
+    role VARCHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2014-05-18T13:57:04.533314
+CREATE TABLE auth_membership(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2014-05-18T13:57:04.612833
+CREATE TABLE auth_permission(
+    id SERIAL PRIMARY KEY,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE,
+    name VARCHAR(512),
+    table_name VARCHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2014-05-18T13:57:04.716877
+CREATE TABLE auth_event(
+    id SERIAL PRIMARY KEY,
+    time_stamp TIMESTAMP,
+    client_ip VARCHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    origin VARCHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2014-05-18T13:57:04.810736
+CREATE TABLE auth_cas(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    service VARCHAR(512),
+    ticket VARCHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2014-05-18T13:57:04.889570
+CREATE TABLE mytable(
+    id SERIAL PRIMARY KEY,
+    myfield VARCHAR(512),
+    myfield2 INTEGER
+);
+success!
+timestamp: 2014-05-18T13:57:34.605211
+ALTER TABLE mytable ADD myfield2__tmp VARCHAR(512);
+UPDATE mytable SET myfield2__tmp=myfield2;
+ALTER TABLE mytable DROP COLUMN myfield2;
+ALTER TABLE mytable ADD myfield2 VARCHAR(512);
+UPDATE mytable SET myfield2=myfield2__tmp;
+ALTER TABLE mytable DROP COLUMN myfield2__tmp;
+success!
+timestamp: 2014-05-18T13:59:25.299452
+CREATE TABLE courses(
+    id SERIAL PRIMARY KEY,
+    sNo INTEGER,
+    slot VARCHAR(512)
+);
+success!
+timestamp: 2014-05-18T13:59:38.967009
+ALTER TABLE courses ADD courseid VARCHAR(512);
+timestamp: 2014-05-18T13:59:38.991048
+ALTER TABLE courses ADD coursename VARCHAR(512);
+timestamp: 2014-05-18T13:59:39.010955
+ALTER TABLE courses ADD credits FLOAT8;
+success!
+timestamp: 2014-05-18T14:00:46.048043
+ALTER TABLE courses ADD l INTEGER;
+success!
+timestamp: 2014-05-18T14:02:49.604693
+ALTER TABLE courses ADD tut INTEGER;
+timestamp: 2014-05-18T14:02:49.608579
+ALTER TABLE courses DROP COLUMN l;
+success!
+timestamp: 2014-05-18T14:04:21.550948
+ALTER TABLE courses ADD lec INTEGER;
+timestamp: 2014-05-18T14:04:21.554258
+ALTER TABLE courses ADD pra INTEGER;
+success!
+timestamp: 2014-05-18T14:04:31.644593
+ALTER TABLE courses ADD core CHAR(1);
+timestamp: 2014-05-18T14:04:31.648672
+ALTER TABLE courses ADD regstud INTEGER;
+timestamp: 2014-05-18T14:04:31.651380
+ALTER TABLE courses ADD coordi VARCHAR(512);
+success!
+timestamp: 2014-05-18T14:08:58.668246
+CREATE TABLE timetable(
+    id SERIAL PRIMARY KEY,
+    tNo INTEGER,
+    courseList VARCHAR(512),
+    commentList VARCHAR(512)
+);
+success!
+timestamp: 2014-05-18T14:15:55.652848
+CREATE TABLE timetables(
+    id SERIAL PRIMARY KEY,
+    tNo INTEGER,
+    courseList VARCHAR(512),
+    noteList VARCHAR(512)
+);
+success!
+timestamp: 2014-05-18T14:16:25.821790
+CREATE TABLE slots(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(512),
+    days VARCHAR(512),
+    sTime VARCHAR(512),
+    eTime VARCHAR(512),
+    stype VARCHAR(512)
+);
+success!
+timestamp: 2014-05-18T14:20:47.071880
+ALTER TABLE courses ADD p INTEGER;
+timestamp: 2014-05-18T14:20:47.076593
+ALTER TABLE courses ADD l INTEGER;
+timestamp: 2014-05-18T14:20:47.079713
+ALTER TABLE courses ADD t INTEGER;
+timestamp: 2014-05-18T14:20:47.085640
+ALTER TABLE courses DROP COLUMN lec;
+timestamp: 2014-05-18T14:20:47.088418
+ALTER TABLE courses DROP COLUMN pra;
+timestamp: 2014-05-18T14:20:47.090760
+ALTER TABLE courses DROP COLUMN tut;
+success!
+timestamp: 2014-05-18T14:20:58.714249
+ALTER TABLE slots ADD day VARCHAR(512);
+timestamp: 2014-05-18T14:20:58.836522
+ALTER TABLE slots ADD type VARCHAR(512);
+timestamp: 2014-05-18T14:20:58.839979
+ALTER TABLE slots DROP COLUMN days;
+timestamp: 2014-05-18T14:20:58.842158
+ALTER TABLE slots DROP COLUMN stype;
+success!
+success!
+timestamp: 2014-05-18T14:33:07.131495
+CREATE TABLE students(
+    id SERIAL PRIMARY KEY,
+    username INTEGER REFERENCES auth_user (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2014-05-18T17:55:08.870321
+ALTER TABLE auth_user ADD city VARCHAR(512);
+timestamp: 2014-05-18T17:55:09.030928
+ALTER TABLE auth_user ADD zip VARCHAR(512);
+timestamp: 2014-05-18T17:55:09.035137
+ALTER TABLE auth_user ADD phone VARCHAR(512);
+timestamp: 2014-05-18T17:55:09.038405
+ALTER TABLE auth_user ADD address VARCHAR(512);
+success!
+timestamp: 2014-05-18T17:56:44.141659
+ALTER TABLE auth_user ADD endtry VARCHAR(512);
+timestamp: 2014-05-18T17:56:44.257175
+ALTER TABLE auth_user DROP COLUMN address;
+success!
+timestamp: 2014-05-18T17:56:51.080202
+ALTER TABLE auth_user ADD entry VARCHAR(512);
+timestamp: 2014-05-18T17:56:51.140067
+ALTER TABLE auth_user DROP COLUMN endtry;
+success!
+timestamp: 2014-05-18T17:56:59.731541
+ALTER TABLE auth_user ADD entry  VARCHAR(512);
+timestamp: 2014-05-18T17:57:12.715708
+ALTER TABLE auth_user ADD entryno VARCHAR(512);
+timestamp: 2014-05-18T17:57:12.821358
+ALTER TABLE auth_user DROP COLUMN entry;
+success!
+timestamp: 2014-05-18T17:57:21.626239
+ALTER TABLE auth_user DROP COLUMN city;
+timestamp: 2014-05-18T17:57:21.631053
+ALTER TABLE auth_user DROP COLUMN zip;
+timestamp: 2014-05-18T17:57:21.633393
+ALTER TABLE auth_user DROP COLUMN phone;
+success!
+timestamp: 2014-05-18T17:59:00.464789
+ALTER TABLE students ADD username__tmp VARCHAR(512);
+UPDATE students SET username__tmp=username;
+ALTER TABLE students DROP COLUMN username;
+ALTER TABLE students ADD username VARCHAR(512);
+UPDATE students SET username=username__tmp;
+ALTER TABLE students DROP COLUMN username__tmp;
+timestamp: 2014-05-18T17:59:00.798514
+ALTER TABLE students ADD name INTEGER REFERENCES auth_user (id) ON DELETE CASCADE;
+success!
+timestamp: 2014-05-18T18:00:00.631625
+ALTER TABLE auth_user ADD username VARCHAR(128);
+success!
+timestamp: 2014-05-18T18:03:05.479373
+CREATE TABLE usertables(
+    id SERIAL PRIMARY KEY,
+    username INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    tNo INTEGER REFERENCES timetables (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2014-05-18T18:07:36.466529
+ALTER TABLE usertables DROP COLUMN id;
+success!
+timestamp: 2014-05-18T18:12:14.603936
+ALTER TABLE usertables ADD id SERIAL PRIMARY KEY;
+success!
+timestamp: 2014-06-16T13:20:48.145135
+ALTER TABLE usertables ADD tablename VARCHAR(512);
+success!

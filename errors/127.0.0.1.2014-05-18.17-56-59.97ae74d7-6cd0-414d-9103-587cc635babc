@@ -1,0 +1,1321 @@
+(dp1
+S'output'
+p2
+S'<class \'gluon.contrib.pg8000.errors.ProgrammingError\'> (\'ERROR\', \'42701\', \'column "entry" of relation "auth_user" already exists\')'
+p3
+sS'layer'
+p4
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/applications/schedule/models/db.py'
+p5
+sS'code'
+p6
+S"# -*- coding: utf-8 -*-\n\n#########################################################################\n## This scaffolding model makes your app work on Google App Engine too\n## File is released under public domain and you can use without limitations\n#########################################################################\n\n## if SSL/HTTPS is properly configured and you want all HTTP requests to\n## be redirected to HTTPS, uncomment the line below:\n# request.requires_https()\n\nif not request.env.web2py_runtime_gae:\n    ## if NOT running on Google App Engine use SQLite or other DB\n    db = DAL('postgres://ads:password@localhost/timetable',pool_size=1)\nelse:\n    ## connect to Google BigTable (optional 'google:datastore://namespace')\n    db = DAL('google:datastore')\n    ## store sessions and tickets there\n    session.connect(request, response, db=db)\n    ## or store session in Memcache, Redis, etc.\n    ## from gluon.contrib.memdb import MEMDB\n    ## from google.appengine.api.memcache import Client\n    ## session.connect(request, response, db = MEMDB(Client()))\n\n## by default give a view/generic.extension to all actions from localhost\n## none otherwise. a pattern can be 'controller/function.extension'\nresponse.generic_patterns = ['*'] if request.is_local else []\n## (optional) optimize handling of static files\n# response.optimize_css = 'concat,minify,inline'\n# response.optimize_js = 'concat,minify,inline'\n## (optional) static assets folder versioning\n# response.static_version = '0.0.0'\n#########################################################################\n## Here is sample code if you need for\n## - email capabilities\n## - authentication (registration, login, logout, ... )\n## - authorization (role based authorization)\n## - services (xml, csv, json, xmlrpc, jsonrpc, amf, rss)\n## - old style crud actions\n## (more options discussed in gluon/tools.py)\n#########################################################################\n\nfrom gluon.tools import Auth, Crud, Service, PluginManager, prettydate\nauth = Auth(db)\ncrud, service, plugins = Crud(db), Service(), PluginManager()\n\n## create all tables needed by auth if not custom tables\n\nauth.settings.extra_fields['auth_user']= [\n  Field('Entry '),\n  Field('city'),\n  Field('zip'),\n  Field('phone')]\nauth.define_tables(username=False, signature=False)\n\n## configure email\nmail = auth.settings.mailer\nmail.settings.server = 'logging' or 'smtp.gmail.com:587'\nmail.settings.sender = 'you@gmail.com'\nmail.settings.login = 'username:password'\n\n## configure auth policy\nauth.settings.registration_requires_verification = False\nauth.settings.registration_requires_approval = False\nauth.settings.reset_password_requires_verification = True\n\n## if you need to use OpenID, Facebook, MySpace, Twitter, Linkedin, etc.\n## register with janrain.com, write your domain:api_key in private/janrain.key\nfrom gluon.contrib.login_methods.rpx_account import use_janrain\nuse_janrain(auth, filename='private/janrain.key')\n\n#########################################################################\n## Define your tables below (or better in another model file) for example\n##\n##db.define_table('mytable',Field('myfield','string'),Field('myfield2','string'))\ndb.define_table('slots',Field('name','string'),Field('day','string'),Field('sTime','string'),Field('eTime','string'),Field('type','string'),format='%(name)s')\ndb.define_table('courses',Field('sNo','integer'),Field('slot',db.slots),Field('courseId','string'),Field('courseName','string'),Field('credits','double'),Field('L','integer'),Field('T','integer'),Field('P','integer'),Field('coordi','string'),Field('regStud','integer'),Field('core','boolean'),format='%(name)s')\ndb.define_table('timetables',Field('tNo','integer'),Field('courseList','string'),Field('noteList','string'))\n## Fields can be 'string','text','password','integer','double','boolean'\n##       'date','time','datetime','blob','upload', 'reference TABLENAME'\n## There is an implicit 'id integer autoincrement' field\n## Consult manual for more options, validators, etc.\n##\n## More API examples for controllers:\n##\n## >>> db.mytable.insert(myfield='value')\n## >>> rows=db(db.mytable.myfield=='value').select(db.mytable.ALL)\n## >>> for row in rows: print row.id, row.myfield\n#########################################################################\n\n## after defining tables, uncomment below to enable auditing\n# auth.enable_record_versioning(db)\n"
+p7
+sS'snapshot'
+p8
+(dp9
+S'exception'
+p10
+(dp11
+S'__module__'
+p12
+S"'gluon.contrib.pg8000.errors'"
+p13
+sS'__getslice__'
+p14
+S"<method-wrapper '__getslice__' of ProgrammingError object>"
+p15
+sS'__str__'
+p16
+S"<method-wrapper '__str__' of ProgrammingError object>"
+p17
+sS'__reduce__'
+p18
+S'<built-in method __reduce__ of ProgrammingError object>'
+p19
+sS'__dict__'
+p20
+S'{}'
+p21
+sS'__sizeof__'
+p22
+S'<built-in method __sizeof__ of ProgrammingError object>'
+p23
+sS'__weakref__'
+p24
+S'None'
+p25
+sS'__init__'
+p26
+S"<method-wrapper '__init__' of ProgrammingError object>"
+p27
+sS'__setattr__'
+p28
+S"<method-wrapper '__setattr__' of ProgrammingError object>"
+p29
+sS'__reduce_ex__'
+p30
+S'<built-in method __reduce_ex__ of ProgrammingError object>'
+p31
+sS'__new__'
+p32
+S'<built-in method __new__ of type object>'
+p33
+sS'__format__'
+p34
+S'<built-in method __format__ of ProgrammingError object>'
+p35
+sS'__class__'
+p36
+S"<class 'gluon.contrib.pg8000.errors.ProgrammingError'>"
+p37
+sS'__doc__'
+p38
+S'None'
+p39
+sS'__getitem__'
+p40
+S"<method-wrapper '__getitem__' of ProgrammingError object>"
+p41
+sS'__setstate__'
+p42
+S'<built-in method __setstate__ of ProgrammingError object>'
+p43
+sS'__getattribute__'
+p44
+S"<method-wrapper '__getattribute__' of ProgrammingError object>"
+p45
+sS'args'
+p46
+S'(\'ERROR\', \'42701\', \'column "entry" of relation "auth_user" already exists\')'
+p47
+sS'__subclasshook__'
+p48
+S'<built-in method __subclasshook__ of type object>'
+p49
+sS'__unicode__'
+p50
+S'<built-in method __unicode__ of ProgrammingError object>'
+p51
+sS'__delattr__'
+p52
+S"<method-wrapper '__delattr__' of ProgrammingError object>"
+p53
+sS'__repr__'
+p54
+S"<method-wrapper '__repr__' of ProgrammingError object>"
+p55
+sS'__hash__'
+p56
+S"<method-wrapper '__hash__' of ProgrammingError object>"
+p57
+ssS'evalue'
+p58
+S'(\'ERROR\', \'42701\', \'column "entry" of relation "auth_user" already exists\')'
+p59
+sS'request'
+p60
+cgluon.html
+XML_unpickle
+p61
+(S's"e\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">ajax</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">application</td><td style="vertical-align:top;">:</td><td><div>schedule</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">args</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>db</div></td></tr><tr><td><div>auth_user</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cid</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">client</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">controller</td><td style="vertical-align:top;">:</td><td><div>appadmin</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_admin</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-089096eb-a471-4c4f-af84-b6965d8ea887<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_first</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-ece2eb96-783d-4d6d-8938-b562aee682f4<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_schedule</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-e017c707-74ae-4a95-a767-20ba875d3d1a<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_welcome</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-db9b8289-9e2f-461d-a35d-e1bbf380c107<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">env</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT</td><td style="vertical-align:top;">:</td><td><div>text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_ENCODING</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_LANGUAGE</td><td style="vertical-align:top;">:</td><td><div>en-us</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CACHE_CONTROL</td><td style="vertical-align:top;">:</td><td><div>max-age=0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CONNECTION</td><td style="vertical-align:top;">:</td><td><div>keep-alive</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_COOKIE</td><td style="vertical-align:top;">:</td><td><div>session_id_admin=127.0.0.1-089096eb-a471-4c4f-af84-b6965d8ea887; session_id_first=127.0.0.1-ece2eb96-783d-4d6d-8938-b562aee682f4; session_id_schedule=127.0.0.1-e017c707-74ae-4a95-a767-20ba875d3d1a; session_id_welcome=127.0.0.1-db9b8289-9e2f-461d-a35d-e1bbf380c107</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_HOST</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1:8000</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_REFERER</td><td style="vertical-align:top;">:</td><td><div>http://127.0.0.1:8000/schedule/appadmin/index</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_USER_AGENT</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9) AppleWebKit/537.71 (KHTML, like Gecko) Version/7.0 Safari/537.71</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">PATH_INFO</td><td style="vertical-align:top;">:</td><td><div>/schedule/appadmin/insert/db/auth_user</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">QUERY_STRING</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_ADDR</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_PORT</td><td style="vertical-align:top;">:</td><td><div>62493</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REQUEST_METHOD</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SCRIPT_NAME</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_NAME</td><td style="vertical-align:top;">:</td><td><div>Abhinavs-MacBook-Pro.local</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PORT</td><td style="vertical-align:top;">:</td><td><div>8000</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PROTOCOL</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_SOFTWARE</td><td style="vertical-align:top;">:</td><td><div>Rocket 1.2.6</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py/applications/schedule/&#x27;, &#x27;/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py/applications/admin/&#x27;, &#x27;/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py/applications/welcome/&#x27;, &#x27;/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py/applications/Schedule/&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_args</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_options</td><td style="vertical-align:top;">:</td><td><div>&lt;Values at 0x10dd0ffc8: {&#x27;verbose&#x27;: False, &#x27;ip&#x27;: &#x27;127.0.0.1&#x27;, &#x27;debuglevel&#x27;: 30, &#x27;with_scheduler&#x27;: False, &#x27;ips&#x27;: [&#x27;10.208.23.20&#x27;, &#x27;fe80::426c:8fff:fe1e:76e%en0&#x27;], &#x27;shutdown_timeout&#x27;: 5, &#x27;taskbar&#x27;: False, &#x27;with_coverage&#x27;: False, &#x27;port&#x27;: 8000, &#x27;maxthreads&#x27;: None, &#x27;softcron&#x27;: False, &#x27;server_name&#x27;: &#x27;Abhinavs-MacBook-Pro.local&#x27;, &#x27;bpython&#x27;: False, &#x27;nogui&#x27;: False, &#x27;pid_filename&#x27;: &#x27;httpserver.pid&#x27;, &#x27;extcron&#x27;: False, &#x27;runcron&#x27;: False, &#x27;run_system_tests&#x27;: False, &#x27;test&#x27;: None, &#x27;folder&#x27;: &#x27;/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py&#x27;, &#x27;config&#x27;: &#x27;&#x27;, &#x27;minthreads&#x27;: None, &#x27;shell&#x27;: None, &#x27;run&#x27;: &#x27;&#x27;, &#x27;log_filename&#x27;: &#x27;httpserver.log&#x27;, &#x27;profiler_dir&#x27;: None, &#x27;args&#x27;: [&#x27;&#x27;], &#x27;socket_timeout&#x27;: 5, &#x27;ssl_ca_certificate&#x27;: None, &#x27;scheduler&#x27;: None, &#x27;interfaces&#x27;: None, &#x27;ssl_private_key&#x27;: &#x27;&#x27;, &#x27;scheduler_groups&#x27;: None, &#x27;password&#x27;: &#x27;&lt;ask&gt;&#x27;, &#x27;request_queue_size&#x27;: 5, &#x27;ssl_certificate&#x27;: &#x27;&#x27;, &#x27;cronjob&#x27;: False, &#x27;numthreads&#x27;: None, &#x27;quiet&#x27;: False, &#x27;import_models&#x27;: False, &#x27;timeout&#x27;: 10, &#x27;plain&#x27;: False, &#x27;nobanner&#x27;: False}&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept</td><td style="vertical-align:top;">:</td><td><div>text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_encoding</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_language</td><td style="vertical-align:top;">:</td><td><div>en-us</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cache_control</td><td style="vertical-align:top;">:</td><td><div>max-age=0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_connection</td><td style="vertical-align:top;">:</td><td><div>keep-alive</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cookie</td><td style="vertical-align:top;">:</td><td><div>session_id_admin=127.0.0.1-089096eb-a471-4c4f-af84-b6965d8ea887; session_id_first=127.0.0.1-ece2eb96-783d-4d6d-8938-b562aee682f4; session_id_schedule=127.0.0.1-e017c707-74ae-4a95-a767-20ba875d3d1a; session_id_welcome=127.0.0.1-db9b8289-9e2f-461d-a35d-e1bbf380c107</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_host</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1:8000</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_referer</td><td style="vertical-align:top;">:</td><td><div>http://127.0.0.1:8000/schedule/appadmin/index</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_user_agent</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9) AppleWebKit/537.71 (KHTML, like Gecko) Version/7.0 Safari/537.71</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>Abhinavs-MacBook-Pro.local</div></td></tr><tr><td><div>fe80::426c:8fff:fe1e:76e%en0</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>10.208.23.20</div></td></tr><tr><td><div>127.0.0.1</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path_info</td><td style="vertical-align:top;">:</td><td><div>/schedule/appadmin/insert/db/auth_user</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">query_string</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_addr</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_port</td><td style="vertical-align:top;">:</td><td><div>62493</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_method</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_uri</td><td style="vertical-align:top;">:</td><td><div>/schedule/appadmin/insert/db/auth_user</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">script_name</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_name</td><td style="vertical-align:top;">:</td><td><div>Abhinavs-MacBook-Pro.local</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_port</td><td style="vertical-align:top;">:</td><td><div>8000</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_protocol</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_software</td><td style="vertical-align:top;">:</td><td><div>Rocket 1.2.6</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_path</td><td style="vertical-align:top;">:</td><td><div>/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.9.5-stable+timestamp.2014.03.16.02.35.39</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.errors</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;&lt;stderr&gt;&#x27;, mode &#x27;w&#x27; at 0x10ce971e0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;class wsgiref.util.FileWrapper at 0x10dcb5390&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.input</td><td style="vertical-align:top;">:</td><td><div>&lt;socket._fileobject object at 0x11a1fe450&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multiprocess</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multithread</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.url_scheme</td><td style="vertical-align:top;">:</td><td><div>http</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_errors</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;&lt;stderr&gt;&#x27;, mode &#x27;w&#x27; at 0x10ce971e0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;class wsgiref.util.FileWrapper at 0x10dcb5390&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_input</td><td style="vertical-align:top;">:</td><td><div>&lt;socket._fileobject object at 0x11a1fe450&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multiprocess</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multithread</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_url_scheme</td><td style="vertical-align:top;">:</td><td><div>http</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">extension</td><td style="vertical-align:top;">:</td><td><div>html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">folder</td><td style="vertical-align:top;">:</td><td><div>/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py/applications/schedule/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">function</td><td style="vertical-align:top;">:</td><td><div>insert</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">global_settings</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py/applications/schedule/&#x27;, &#x27;/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py/applications/admin/&#x27;, &#x27;/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py/applications/welcome/&#x27;, &#x27;/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py/applications/Schedule/&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_args</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cmd_options</td><td style="vertical-align:top;">:</td><td><div>&lt;Values at 0x10dd0ffc8: {&#x27;verbose&#x27;: False, &#x27;ip&#x27;: &#x27;127.0.0.1&#x27;, &#x27;debuglevel&#x27;: 30, &#x27;with_scheduler&#x27;: False, &#x27;ips&#x27;: [&#x27;10.208.23.20&#x27;, &#x27;fe80::426c:8fff:fe1e:76e%en0&#x27;], &#x27;shutdown_timeout&#x27;: 5, &#x27;taskbar&#x27;: False, &#x27;with_coverage&#x27;: False, &#x27;port&#x27;: 8000, &#x27;maxthreads&#x27;: None, &#x27;softcron&#x27;: False, &#x27;server_name&#x27;: &#x27;Abhinavs-MacBook-Pro.local&#x27;, &#x27;bpython&#x27;: False, &#x27;nogui&#x27;: False, &#x27;pid_filename&#x27;: &#x27;httpserver.pid&#x27;, &#x27;extcron&#x27;: False, &#x27;runcron&#x27;: False, &#x27;run_system_tests&#x27;: False, &#x27;test&#x27;: None, &#x27;folder&#x27;: &#x27;/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py&#x27;, &#x27;config&#x27;: &#x27;&#x27;, &#x27;minthreads&#x27;: None, &#x27;shell&#x27;: None, &#x27;run&#x27;: &#x27;&#x27;, &#x27;log_filename&#x27;: &#x27;httpserver.log&#x27;, &#x27;profiler_dir&#x27;: None, &#x27;args&#x27;: [&#x27;&#x27;], &#x27;socket_timeout&#x27;: 5, &#x27;ssl_ca_certificate&#x27;: None, &#x27;scheduler&#x27;: None, &#x27;interfaces&#x27;: None, &#x27;ssl_private_key&#x27;: &#x27;&#x27;, &#x27;scheduler_groups&#x27;: None, &#x27;password&#x27;: &#x27;&lt;ask&gt;&#x27;, &#x27;request_queue_size&#x27;: 5, &#x27;ssl_certificate&#x27;: &#x27;&#x27;, &#x27;cronjob&#x27;: False, &#x27;numthreads&#x27;: None, &#x27;quiet&#x27;: False, &#x27;import_models&#x27;: False, &#x27;timeout&#x27;: 10, &#x27;plain&#x27;: False, &#x27;nobanner&#x27;: False}&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>Abhinavs-MacBook-Pro.local</div></td></tr><tr><td><div>fe80::426c:8fff:fe1e:76e%en0</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>10.208.23.20</div></td></tr><tr><td><div>127.0.0.1</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.9.5-stable+timestamp.2014.03.16.02.35.39</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_https</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_local</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_restful</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">now</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2014, 5, 18, 17, 56, 59, 708749)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">raw_args</td><td style="vertical-align:top;">:</td><td><div>db/auth_user</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">raw_extension</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">url</td><td style="vertical-align:top;">:</td><td><div>/schedule/appadmin/insert/db/auth_user</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">utcnow</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2014, 5, 18, 12, 26, 59, 708758)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uuid</td><td style="vertical-align:top;">:</td><td><div>schedule/127.0.0.1.2014-05-18.17-56-59.97ae74d7-6cd0-414d-9103-587cc635babc</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi</td><td style="vertical-align:top;">:</td><td><div>&lt;gluon.main.LazyWSGI object at 0x116c729d0&gt;</div></td></tr></table></div>'
+tRp62
+sS'frames'
+p63
+(lp64
+(dp65
+S'file'
+p66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/restricted.py'
+p67
+sS'dump'
+p68
+(dp69
+S'environment'
+p70
+S"{'A': <class 'gluon.html.A'>, 'ANY_OF': <class 'gluon.validators.ANY_OF'>, 'Auth': <class 'gluon.tools.Auth'>, 'B': <class 'gluon.html.B'>, 'BEAUTIFY': <class 'gluon.html.BEAUTIFY'>, 'BODY': <class 'gluon.html.BODY'>, 'BR': <class 'gluon.html.BR'>, 'BUTTON': <class 'gluon.html.BUTTON'>, 'CAT': <class 'gluon.html.CAT'>, 'CENTER': <class 'gluon.html.CENTER'>, ...}"
+p71
+sS'ccode'
+p72
+S'<code object <module> at 0x116bbf1b0, file "/Use...2py/applications/schedule/models/db.py", line 12>'
+p73
+ssS'lnum'
+p74
+I220
+sS'lines'
+p75
+(dp76
+I224
+S'        # do not encapsulate (obfuscate) the original RestrictedError'
+p77
+sI215
+S'    try:'
+p78
+sI216
+S'        if isinstance(code, types.CodeType):'
+p79
+sI217
+S'            ccode = code'
+p80
+sI218
+S'        else:'
+p81
+sI219
+S'            ccode = compile2(code, layer)'
+p82
+sI220
+S'        exec ccode in environment'
+p83
+sI221
+S'    except HTTP:'
+p84
+sI222
+S'        raise'
+p85
+sI223
+S'    except RestrictedError:'
+p86
+ssS'call'
+p87
+S"(code='# -*- coding: utf-8 -*-\\n\\n#######################...ble auditing\\n# auth.enable_record_versioning(db)\\n', environment={'A': <class 'gluon.html.A'>, 'ANY_OF': <class 'gluon.validators.ANY_OF'>, 'Auth': <class 'gluon.tools.Auth'>, 'B': <class 'gluon.html.B'>, 'BEAUTIFY': <class 'gluon.html.BEAUTIFY'>, 'BODY': <class 'gluon.html.BODY'>, 'BR': <class 'gluon.html.BR'>, 'BUTTON': <class 'gluon.html.BUTTON'>, 'CAT': <class 'gluon.html.CAT'>, 'CENTER': <class 'gluon.html.CENTER'>, ...}, layer='/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/applications/schedule/models/db.py')"
+p88
+sS'func'
+p89
+S'restricted'
+p90
+sa(dp91
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/applications/schedule/models/db.py'
+p92
+sg68
+(dp93
+S'username'
+p94
+S'undefined'
+p95
+sS'auth.define_tables'
+p96
+S'<bound method Auth.define_tables of <gluon.tools.Auth object>>'
+p97
+sS'builtinFalse'
+p98
+S'False'
+p99
+sS'auth'
+p100
+S'<gluon.tools.Auth object>'
+p101
+sS'signature'
+p102
+g95
+ssg74
+I54
+sg75
+(dp103
+I49
+S"auth.settings.extra_fields['auth_user']= ["
+p104
+sI50
+S"  Field('Entry '),"
+p105
+sI51
+S"  Field('city'),"
+p106
+sI52
+S"  Field('zip'),"
+p107
+sI53
+S"  Field('phone')]"
+p108
+sI54
+S'auth.define_tables(username=False, signature=False)'
+p109
+sI55
+S''
+sI56
+S'## configure email'
+p110
+sI57
+S'mail = auth.settings.mailer'
+p111
+sI58
+S"mail.settings.server = 'logging' or 'smtp.gmail.com:587'"
+p112
+ssg87
+S'()'
+p113
+sg89
+S'<module>'
+p114
+sa(dp115
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/tools.py'
+p116
+sg68
+(dp117
+S'builtinformat'
+p118
+S'<built-in function format>'
+p119
+ssg74
+I1784
+sg75
+(dp120
+I1779
+S'                    *extra_fields,'
+p121
+sI1780
+S'                    **dict('
+p122
+sI1781
+S'                        migrate=self.__get_migrate(settings.table_user_name,'
+p123
+sI1782
+S'                                                   migrate),'
+p124
+sI1783
+S'                        fake_migrate=fake_migrate,'
+p125
+sI1784
+S"                        format='%(first_name)s %(last_name)s (%(id)s)'))"
+p126
+sI1785
+S"        reference_table_user = 'reference %s' % settings.table_user_name"
+p127
+sI1786
+S'        if not settings.table_group_name in db.tables:'
+p128
+sI1787
+S'            extra_fields = settings.extra_fields.get('
+p129
+sI1788
+S'                settings.table_group_name, []) + signature_list'
+p130
+ssg87
+S'(self=<gluon.tools.Auth object>, username=False, signature=False, migrate=True, fake_migrate=False)'
+p131
+sg89
+S'define_tables'
+p132
+sa(dp133
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/dal.py'
+p134
+sg68
+(dp135
+S'fields'
+p136
+S'(<gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>)'
+p137
+sS'self'
+p138
+S'<DAL uri="postgres:******@localhost/timetable">'
+p139
+sS'args'
+p140
+S"{'fake_migrate': False, 'format': '%(first_name)s %(last_name)s (%(id)s)', 'migrate': True}"
+p141
+sS'tablename'
+p142
+S"'auth_user'"
+p143
+sS'table'
+p144
+g95
+sS'self.lazy_define_table'
+p145
+S'<bound method DAL.lazy_define_table of <DAL uri="postgres:******@localhost/timetable">>'
+p146
+ssg74
+I8223
+sg75
+(dp147
+I8224
+S'        if not tablename in self.tables:'
+p148
+sI8225
+S'            self.tables.append(tablename)'
+p149
+sI8226
+S'        return table'
+p150
+sI8227
+S''
+sI8218
+S'                    % (tablename,invalid_args))'
+p151
+sI8219
+S'        if self._lazy_tables and not tablename in self._LAZY_TABLES:'
+p152
+sI8220
+S'            self._LAZY_TABLES[tablename] = (tablename,fields,args)'
+p153
+sI8221
+S'            table = None'
+p154
+sI8222
+S'        else:'
+p155
+sI8223
+S'            table = self.lazy_define_table(tablename,*fields,**args)'
+p156
+ssg87
+S'(self=<DAL uri="postgres:******@localhost/timetable">, tablename=\'auth_user\', *fields=(<gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>), **args={\'fake_migrate\': False, \'format\': \'%(first_name)s %(last_name)s (%(id)s)\', \'migrate\': True})'
+p157
+sg89
+S'define_table'
+p158
+sa(dp159
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/dal.py'
+p160
+sg68
+(dp161
+S'polymodel'
+p162
+S'None'
+p163
+ssg74
+I8260
+sg75
+(dp164
+I8256
+S'                GLOBAL_LOCKER.acquire()'
+p165
+sI8257
+S'                self._lastsql = self._adapter.create_table('
+p166
+sI8258
+S'                    table,migrate=migrate,'
+p167
+sI8259
+S'                    fake_migrate=fake_migrate,'
+p168
+sI8260
+S'                    polymodel=polymodel)'
+p169
+sI8261
+S'            finally:'
+p170
+sI8262
+S'                GLOBAL_LOCKER.release()'
+p171
+sI8263
+S'        else:'
+p172
+sI8264
+S'            table._dbt = None'
+p173
+sI8255
+S'            try:'
+p174
+ssg87
+S'(self=<DAL uri="postgres:******@localhost/timetable">, tablename=\'auth_user\', *fields=(<gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>, <gluon.dal.Field object>), **args={\'fake_migrate\': False, \'format\': \'%(first_name)s %(last_name)s (%(id)s)\', \'migrate\': True})'
+p175
+sg89
+S'lazy_define_table'
+p176
+sa(dp177
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/dal.py'
+p178
+sg68
+(dp179
+S'fake_migrate'
+p180
+g99
+ssg74
+I1132
+sg75
+(dp181
+I1127
+S'            if sql_fields != sql_fields_old:'
+p182
+sI1128
+S'                self.migrate_table('
+p183
+sI1129
+S'                    table,'
+p184
+sI1130
+S'                    sql_fields, sql_fields_old,'
+p185
+sI1131
+S'                    sql_fields_aux, None,'
+p186
+sI1132
+S'                    fake_migrate=fake_migrate'
+p187
+sI1133
+S'                    )'
+p188
+sI1134
+S'        return query'
+p189
+sI1135
+S''
+sI1136
+S'    def migrate_table('
+p190
+ssg87
+S'(self=<gluon.dal.PostgreSQLAdapter object>, table=<Table auth_user (id,first_name,last_name,email,...sword_key,registration_id,Entry ,city,zip,phone)>, migrate=True, fake_migrate=False, polymodel=None)'
+p191
+sg89
+S'create_table'
+p192
+sa(dp193
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/dal.py'
+p194
+sg68
+(dp195
+S'self'
+p196
+S'<gluon.dal.PostgreSQLAdapter object>'
+p197
+sS'self.execute'
+p198
+S'<bound method PostgreSQLAdapter.execute of <gluon.dal.PostgreSQLAdapter object>>'
+p199
+sS'sub_query'
+p200
+S"'ALTER TABLE auth_user ADD entry  VARCHAR(512);'"
+p201
+ssg74
+I1245
+sg75
+(dp202
+I1248
+S'                        # in one transaction so we must commit'
+p203
+sI1249
+S'                        # partial transactions and'
+p204
+sI1240
+S'                    if fake_migrate:'
+p205
+sI1241
+S'                        if db._adapter.commit_on_alter_table:'
+p206
+sI1242
+S'                            self.save_dbt(table,sql_fields_current)'
+p207
+sI1243
+S"                        self.log('faked!\\n', table)"
+p208
+sI1244
+S'                    else:'
+p209
+sI1245
+S'                        self.execute(sub_query)'
+p210
+sI1246
+S'                        # Caveat: mysql, oracle and firebird'
+p211
+sI1247
+S'                        # do not allow multiple alter table'
+p212
+ssg87
+S"(self=<gluon.dal.PostgreSQLAdapter object>, table=<Table auth_user (id,first_name,last_name,email,...sword_key,registration_id,Entry ,city,zip,phone)>, sql_fields={'city': {'length': 512, 'notnull': False, 'sortable': 10, 'sql': 'VARCHAR(512)', 'type': 'string', 'unique': False}, 'email': {'length': 512, 'notnull': False, 'sortable': 4, 'sql': 'VARCHAR(512)', 'type': 'string', 'unique': False}, 'entry ': {'length': 512, 'notnull': False, 'sortable': 9, 'sql': 'VARCHAR(512)', 'type': 'string', 'unique': False}, 'first_name': {'length': 128, 'notnull': False, 'sortable': 2, 'sql': 'VARCHAR(128)', 'type': 'string', 'unique': False}, 'id': {'length': 512, 'notnull': False, 'sortable': 1, 'sql': 'SERIAL PRIMARY KEY', 'type': 'id', 'unique': False}, 'last_name': {'length': 128, 'notnull': False, 'sortable': 3, 'sql': 'VARCHAR(128)', 'type': 'string', 'unique': False}, 'password': {'length': 512, 'notnull': False, 'sortable': 5, 'sql': 'VARCHAR(512)', 'type': 'password', 'unique': False}, 'phone': {'length': 512, 'notnull': False, 'sortable': 12, 'sql': 'VARCHAR(512)', 'type': 'string', 'unique': False}, 'registration_id': {'length': 512, 'notnull': False, 'sortable': 8, 'sql': 'VARCHAR(512)', 'type': 'string', 'unique': False}, 'registration_key': {'length': 512, 'notnull': False, 'sortable': 6, 'sql': 'VARCHAR(512)', 'type': 'string', 'unique': False}, ...}, sql_fields_old={'city': {'length': 512, 'notnull': False, 'sortable': 10, 'sql': 'VARCHAR(512)', 'type': 'string', 'unique': False}, 'email': {'length': 512, 'notnull': False, 'sortable': 4, 'sql': 'VARCHAR(512)', 'type': 'string', 'unique': False}, 'entry': {'length': 512, 'notnull': False, 'sortable': 9, 'sql': 'VARCHAR(512)', 'type': 'string', 'unique': False}, 'first_name': {'length': 128, 'notnull': False, 'sortable': 2, 'sql': 'VARCHAR(128)', 'type': 'string', 'unique': False}, 'id': {'length': 512, 'notnull': False, 'sortable': 1, 'sql': 'SERIAL PRIMARY KEY', 'type': 'id', 'unique': False}, 'last_name': {'length': 128, 'notnull': False, 'sortable': 3, 'sql': 'VARCHAR(128)', 'type': 'string', 'unique': False}, 'password': {'length': 512, 'notnull': False, 'sortable': 5, 'sql': 'VARCHAR(512)', 'type': 'password', 'unique': False}, 'phone': {'length': 512, 'notnull': False, 'sortable': 12, 'sql': 'VARCHAR(512)', 'type': 'string', 'unique': False}, 'registration_id': {'length': 512, 'notnull': False, 'sortable': 8, 'sql': 'VARCHAR(512)', 'type': 'string', 'unique': False}, 'registration_key': {'length': 512, 'notnull': False, 'sortable': 6, 'sql': 'VARCHAR(512)', 'type': 'string', 'unique': False}, ...}, sql_fields_aux={'city': {'sql': 'VARCHAR(512)'}, 'email': {'sql': 'VARCHAR(512)'}, 'entry ': {'sql': 'VARCHAR(512)'}, 'first_name': {'sql': 'VARCHAR(128)'}, 'id': {'sql': 'SERIAL PRIMARY KEY'}, 'last_name': {'sql': 'VARCHAR(128)'}, 'password': {'sql': 'VARCHAR(512)'}, 'phone': {'sql': 'VARCHAR(512)'}, 'registration_id': {'sql': 'VARCHAR(512)'}, 'registration_key': {'sql': 'VARCHAR(512)'}, ...}, logfile=None, fake_migrate=False)"
+p213
+sg89
+S'migrate_table'
+p214
+sa(dp215
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/dal.py'
+p216
+sg68
+(dp217
+S'a'
+S"('ALTER TABLE auth_user ADD entry  VARCHAR(512);',)"
+p218
+sS'self'
+p219
+S'<gluon.dal.PostgreSQLAdapter object>'
+p220
+sS'b'
+g21
+sS'self.log_execute'
+p221
+S'<bound method PostgreSQLAdapter.log_execute of <gluon.dal.PostgreSQLAdapter object>>'
+p222
+ssg74
+I1969
+sg75
+(dp223
+I1964
+S'        self.db._timings.append((command,time.time()-t0))'
+p224
+sI1965
+S'        del self.db._timings[:-TIMINGSSIZE]'
+p225
+sI1966
+S'        return ret'
+p226
+sI1967
+S''
+sI1968
+S'    def execute(self, *a, **b):'
+p227
+sI1969
+S'        return self.log_execute(*a, **b)'
+p228
+sI1970
+S''
+sI1971
+S'    def represent(self, obj, fieldtype):'
+p229
+sI1972
+S'        field_is_type = fieldtype.startswith'
+p230
+sI1973
+S'        if isinstance(obj, CALLABLETYPES):'
+p231
+ssg87
+S"(self=<gluon.dal.PostgreSQLAdapter object>, *a=('ALTER TABLE auth_user ADD entry  VARCHAR(512);',), **b={})"
+p232
+sg89
+S'execute'
+p233
+sa(dp234
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/dal.py'
+p235
+sg68
+(dp236
+S'a'
+S"('ALTER TABLE auth_user ADD entry  VARCHAR(512);',)"
+p237
+sS'b'
+g21
+sS'self'
+p238
+S'<gluon.dal.PostgreSQLAdapter object>'
+p239
+sS'ret'
+p240
+g95
+sS'self.cursor'
+p241
+S'<gluon.contrib.pg8000.dbapi.CursorWrapper object>'
+p242
+sS'command'
+p243
+S"'ALTER TABLE auth_user ADD entry  VARCHAR(512);'"
+p244
+sS'self.cursor.execute'
+p245
+S'<bound method CursorWrapper._fn of <gluon.contrib.pg8000.dbapi.CursorWrapper object>>'
+p246
+ssg74
+I1963
+sg75
+(dp247
+I1958
+S'            command = self.filter_sql_command(command)'
+p248
+sI1959
+S'        if self.db._debug:'
+p249
+sI1960
+S"            LOGGER.debug('SQL: %s' % command)"
+p250
+sI1961
+S'        self.db._lastsql = command'
+p251
+sI1962
+S'        t0 = time.time()'
+p252
+sI1963
+S'        ret = self.cursor.execute(command, *a[1:], **b)'
+p253
+sI1964
+S'        self.db._timings.append((command,time.time()-t0))'
+p254
+sI1965
+S'        del self.db._timings[:-TIMINGSSIZE]'
+p255
+sI1966
+S'        return ret'
+p256
+sI1967
+S''
+ssg87
+S"(self=<gluon.dal.PostgreSQLAdapter object>, *a=('ALTER TABLE auth_user ADD entry  VARCHAR(512);',), **b={})"
+p257
+sg89
+S'log_execute'
+p258
+sa(dp259
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/dbapi.py'
+p260
+sg68
+(dp261
+S'self'
+p262
+S'<gluon.contrib.pg8000.dbapi.CursorWrapper object>'
+p263
+sS'args'
+p264
+S"('ALTER TABLE auth_user ADD entry  VARCHAR(512);',)"
+p265
+sS'fn'
+p266
+S'<function execute>'
+p267
+sS'kwargs'
+p268
+g21
+ssg74
+I246
+sg75
+(dp269
+I241
+S''
+sI242
+S'def require_open_cursor(fn):'
+p270
+sI243
+S'    def _fn(self, *args, **kwargs):'
+p271
+sI244
+S'        if self.cursor == None:'
+p272
+sI245
+S'            raise CursorClosedError()'
+p273
+sI246
+S'        return fn(self, *args, **kwargs)'
+p274
+sI247
+S'    return _fn'
+p275
+sI248
+S''
+sI249
+S'##'
+p276
+sI250
+S'# The class of object returned by the {@link #ConnectionWrapper.cursor cursor method}.'
+p277
+ssg87
+S"(self=<gluon.contrib.pg8000.dbapi.CursorWrapper object>, *args=('ALTER TABLE auth_user ADD entry  VARCHAR(512);',), **kwargs={})"
+p278
+sg89
+S'_fn'
+p279
+sa(dp280
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/dbapi.py'
+p281
+sg68
+(dp282
+S'self._execute'
+p283
+S'<bound method CursorWrapper._execute of <gluon.contrib.pg8000.dbapi.CursorWrapper object>>'
+p284
+sS'self'
+p285
+S'<gluon.contrib.pg8000.dbapi.CursorWrapper object>'
+p286
+sS'args'
+p287
+S'()'
+p288
+sS'operation'
+p289
+S"'ALTER TABLE auth_user ADD entry  VARCHAR(512);'"
+p290
+ssg74
+I317
+sg75
+(dp291
+I320
+S'        new_query, new_args = convert_paramstyle(paramstyle, operation, args)'
+p292
+sI321
+S'        try:'
+p293
+sI312
+S'    @require_open_cursor'
+p294
+sI313
+S'    def execute(self, operation, args=()):'
+p295
+sI314
+S'        if not self._connection.in_transaction:'
+p296
+sI315
+S'            self._connection.begin()'
+p297
+sI316
+S'        self._override_rowcount = None'
+p298
+sI317
+S'        self._execute(operation, args)'
+p299
+sI318
+S''
+sI319
+S'    def _execute(self, operation, args=()):'
+p300
+ssg87
+S"(self=<gluon.contrib.pg8000.dbapi.CursorWrapper object>, operation='ALTER TABLE auth_user ADD entry  VARCHAR(512);', args=())"
+p301
+sg89
+g233
+sa(dp302
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/dbapi.py'
+p303
+sg68
+(dp304
+S'new_args'
+p305
+S'()'
+p306
+sS'self.cursor'
+p307
+S'<gluon.contrib.pg8000.interface.Cursor object>'
+p308
+sS'self'
+p309
+S'<gluon.contrib.pg8000.dbapi.CursorWrapper object>'
+p310
+sS'new_query'
+p311
+S"'ALTER TABLE auth_user ADD entry  VARCHAR(512);'"
+p312
+sS'self.cursor.execute'
+p313
+S'<bound method Cursor.execute of <gluon.contrib.pg8000.interface.Cursor object>>'
+p314
+ssg74
+I322
+sg75
+(dp315
+I320
+S'        new_query, new_args = convert_paramstyle(paramstyle, operation, args)'
+p316
+sI321
+S'        try:'
+p317
+sI322
+S'            self.cursor.execute(new_query, *new_args)'
+p318
+sI323
+S'        except ConnectionClosedError:'
+p319
+sI324
+S"            # can't rollback in this case"
+p320
+sI325
+S'            raise'
+p321
+sI326
+S'        except:'
+p322
+sI317
+S'        self._execute(operation, args)'
+p323
+sI318
+S''
+sI319
+S'    def _execute(self, operation, args=()):'
+p324
+ssg87
+S"(self=<gluon.contrib.pg8000.dbapi.CursorWrapper object>, operation='ALTER TABLE auth_user ADD entry  VARCHAR(512);', args=())"
+p325
+sg89
+S'_execute'
+p326
+sa(dp327
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/interface.py'
+p328
+sg68
+(dp329
+S'self._stmt.execute'
+p330
+S'<bound method PreparedStatement.execute of <gluo...ntrib.pg8000.interface.PreparedStatement object>>'
+p331
+sS'kwargs'
+p332
+g21
+sS'self'
+p333
+S'<gluon.contrib.pg8000.interface.Cursor object>'
+p334
+sS'args'
+p335
+S'()'
+p336
+sS'self._stmt'
+p337
+S'<gluon.contrib.pg8000.interface.PreparedStatement object>'
+p338
+ssg74
+I399
+sg75
+(dp339
+I394
+S'                ## print "SimpleQuery:", query'
+p340
+sI395
+S'                self._stmt = SimpleStatement(self.connection, query)'
+p341
+sI396
+S'            else:'
+p342
+sI397
+S'                # use PostgreSQL Extended Query Protocol'
+p343
+sI398
+S'                self._stmt = PreparedStatement(self.connection, query, statement_name="", *[{"type": type(x), "value": x} for x in args])'
+p344
+sI399
+S'            self._stmt.execute(*args, **kwargs)'
+p345
+sI400
+S'        finally:'
+p346
+sI401
+S'            self.connection._unnamed_prepared_statement_lock.release()'
+p347
+sI402
+S''
+sI403
+S'    ##'
+p348
+ssg87
+S"(self=<gluon.contrib.pg8000.interface.Cursor object>, query='ALTER TABLE auth_user ADD entry  VARCHAR(512);', *args=(), **kwargs={})"
+p349
+sg89
+g233
+sa(dp350
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/interface.py'
+p351
+sg68
+(dp352
+S'kwargs.get'
+p353
+S'<built-in method get of dict object>'
+p354
+sS'args'
+p355
+S'()'
+p356
+sS'self.c'
+p357
+S'<gluon.contrib.pg8000.protocol.Connection object>'
+p358
+sS'self'
+p359
+S'<gluon.contrib.pg8000.interface.PreparedStatement object>'
+p360
+sS'cmd'
+p361
+g95
+sS'self._row_desc'
+p362
+S'None'
+p363
+sS'self.c.bind'
+p364
+S'<bound method Connection._fn of <gluon.contrib.pg8000.protocol.Connection object>>'
+p365
+sS'self._statement_name'
+p366
+S"''"
+p367
+sS'self._parse_row_desc'
+p368
+S'(None, [])'
+p369
+sS'kwargs'
+p370
+g21
+sS'self._portal_name'
+p371
+S"'pg8000_portal_186'"
+p372
+ssg74
+I169
+sg75
+(dp373
+I164
+S'                self._ongoing_row_count = 0'
+p374
+sI165
+S'            if self._portal_name != None:'
+p375
+sI166
+S'                self.c.close_portal(self._portal_name)'
+p376
+sI167
+S'            self._command_complete = False'
+p377
+sI168
+S'            self._portal_name = "pg8000_portal_%s" % self._statement_number'
+p378
+sI169
+S'            self._row_desc, cmd = self.c.bind(self._portal_name, self._statement_name, args, self._parse_row_desc, kwargs.get("stream"))'
+p379
+sI170
+S'            if self._row_desc:'
+p380
+sI171
+S'                # We execute our cursor right away to fill up our cache.  This'
+p381
+sI172
+S'                # prevents the cursor from being destroyed, apparently, by a rogue'
+p382
+sI173
+S'                # Sync between Bind and Execute.  Since it is quite likely that'
+p383
+ssg87
+S'(self=<gluon.contrib.pg8000.interface.PreparedStatement object>, *args=(), **kwargs={})'
+p384
+sg89
+g233
+sa(dp385
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/protocol.py'
+p386
+sg68
+(dp387
+S'self'
+p388
+S'<gluon.contrib.pg8000.protocol.Connection object>'
+p389
+sS'args'
+p390
+S"('pg8000_portal_186', '', (), (None, []), None)"
+p391
+sS'fn'
+p392
+S'<function bind>'
+p393
+sS'kwargs'
+p394
+g21
+ssg74
+I943
+sg75
+(dp395
+I938
+S''
+sI939
+S'def sync_on_error(fn):'
+p396
+sI940
+S'    def _fn(self, *args, **kwargs):'
+p397
+sI941
+S'        try:'
+p398
+sI942
+S'            self._sock_lock.acquire()'
+p399
+sI943
+S'            return fn(self, *args, **kwargs)'
+p400
+sI944
+S'        except:'
+p401
+sI945
+S'            self._sync()'
+p402
+sI946
+S'            raise'
+p403
+sI947
+S'        finally:'
+p404
+ssg87
+S"(self=<gluon.contrib.pg8000.protocol.Connection object>, *args=('pg8000_portal_186', '', (), (None, []), None), **kwargs={})"
+p405
+sg89
+g279
+sa(dp406
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/protocol.py'
+p407
+sg68
+(dp408
+S'reader.handle_messages'
+p409
+S'<bound method MessageReader.handle_messages of <gluon.contrib.pg8000.protocol.MessageReader object>>'
+p410
+sS'reader'
+p411
+S'<gluon.contrib.pg8000.protocol.MessageReader object>'
+p412
+ssg74
+I1142
+sg75
+(dp413
+I1137
+S''
+sI1138
+S'        # Return the new row desc, since it will have the format types we'
+p414
+sI1139
+S'        # asked the server for'
+p415
+sI1140
+S'        reader.add_message(RowDescription, lambda msg: (msg, None))'
+p416
+sI1141
+S''
+sI1142
+S'        return reader.handle_messages()'
+p417
+sI1143
+S''
+sI1144
+S'    def _copy_in_response(self, copyin, fileobj, old_reader):'
+p418
+sI1145
+S'        if fileobj == None:'
+p419
+sI1146
+S'            raise CopyQueryWithoutStreamError()'
+p420
+ssg87
+S"(self=<gluon.contrib.pg8000.protocol.Connection object>, portal='pg8000_portal_186', statement='', params=(), parse_data=(None, []), copy_stream=None)"
+p421
+sg89
+S'bind'
+p422
+sa(dp423
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/protocol.py'
+p424
+sg68
+(dp425
+S'msg'
+p426
+S'<gluon.contrib.pg8000.protocol.NoData object>'
+p427
+sS'handler'
+p428
+S'<bound method Connection._bind_nodata of <gluon.contrib.pg8000.protocol.Connection object>>'
+p429
+sS'retval'
+p430
+S'0'
+sS'args'
+p431
+S"('pg8000_portal_186', <gluon.contrib.pg8000.protocol.MessageReader object>, None)"
+p432
+sS'kwargs'
+p433
+g21
+ssg74
+I911
+sg75
+(dp434
+I906
+S'            msg = self._conn._read_message()'
+p435
+sI907
+S'            msg_handled = False'
+p436
+sI908
+S'            for (msg_class, handler, args, kwargs) in self._msgs:'
+p437
+sI909
+S'                if isinstance(msg, msg_class):'
+p438
+sI910
+S'                    msg_handled = True'
+p439
+sI911
+S'                    retval = handler(msg, *args, **kwargs)'
+p440
+sI912
+S'                    if retval:'
+p441
+sI913
+S'                        # The handler returned a true value, meaning that the'
+p442
+sI914
+S'                        # message loop should be aborted.'
+p443
+sI915
+S'                        if exc != None:'
+p444
+ssg87
+S'(self=<gluon.contrib.pg8000.protocol.MessageReader object>)'
+p445
+sg89
+S'handle_messages'
+p446
+sa(dp447
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/protocol.py'
+p448
+sg68
+(dp449
+S'reader.handle_messages'
+p450
+S'<bound method MessageReader.handle_messages of <gluon.contrib.pg8000.protocol.MessageReader object>>'
+p451
+sS'reader'
+p452
+S'<gluon.contrib.pg8000.protocol.MessageReader object>'
+p453
+ssg74
+I1181
+sg75
+(dp454
+I1184
+S''
+sI1185
+S'    @sync_on_error'
+p455
+sI1176
+S'        reader.add_message(CopyOutResponse, self._copy_out_response, copy_stream, reader)'
+p456
+sI1177
+S'        reader.add_message(CopyInResponse, self._copy_in_response, copy_stream, reader)'
+p457
+sI1178
+S"        reader.add_message(CommandComplete, lambda msg, out: out.setdefault('msg', msg) and False, output)"
+p458
+sI1179
+S'        reader.add_message(ReadyForQuery, lambda msg: 1)'
+p459
+sI1180
+S'        reader.delay_raising_exception = True'
+p460
+sI1181
+S'        reader.handle_messages()'
+p461
+sI1182
+S''
+sI1183
+S"        old_reader.return_value((None, output['msg']))"
+p462
+ssg87
+S"(self=<gluon.contrib.pg8000.protocol.Connection object>, msg=<gluon.contrib.pg8000.protocol.NoData object>, portal='pg8000_portal_186', old_reader=<gluon.contrib.pg8000.protocol.MessageReader object>, copy_stream=None)"
+p463
+sg89
+S'_bind_nodata'
+p464
+sa(dp465
+g66
+S'/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/protocol.py'
+p466
+sg68
+(dp467
+S'exc'
+p468
+S'ProgrammingError(\'ERROR\', \'42701\', \'column "entry" of relation "auth_user" already exists\')'
+p469
+ssg74
+I916
+sg75
+(dp470
+I911
+S'                    retval = handler(msg, *args, **kwargs)'
+p471
+sI912
+S'                    if retval:'
+p472
+sI913
+S'                        # The handler returned a true value, meaning that the'
+p473
+sI914
+S'                        # message loop should be aborted.'
+p474
+sI915
+S'                        if exc != None:'
+p475
+sI916
+S'                            raise exc'
+p476
+sI917
+S'                        return retval'
+p477
+sI918
+S'                    elif hasattr(self, "_retval"):'
+p478
+sI919
+S'                        # The handler told us to return -- used for non-true'
+p479
+sI920
+S'                        # return values'
+p480
+ssg87
+S'(self=<gluon.contrib.pg8000.protocol.MessageReader object>)'
+p481
+sg89
+g446
+sasS'pyver'
+p482
+S'Python 2.7.5: /usr/bin/python (prefix: /System/Library/Frameworks/Python.framework/Versions/2.7)'
+p483
+sS'session'
+p484
+g61
+(S's\x1a\x00\x00\x00<div><table></table></div>'
+tRp485
+sS'etype'
+p486
+S"<class 'gluon.contrib.pg8000.errors.ProgrammingError'>"
+p487
+sS'date'
+p488
+S'Sun May 18 17:56:59 2014'
+p489
+sS'response'
+p490
+g61
+(S's0\x17\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">body</td><td style="vertical-align:top;">:</td><td><div>&lt;cStringIO.StringO object at 0x11a339570&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_schedule</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-e017c707-74ae-4a95-a767-20ba875d3d1a<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div>/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">delimiters</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>{{</div></td></tr><tr><td><div>}}</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">files</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">generic_patterns</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>*</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">headers</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">X-Powered-By</td><td style="vertical-align:top;">:</td><td><div>web2py</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">menu</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">meta</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">models_to_run</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>^\\w+\\.py$</div></td></tr><tr><td><div>^appadmin/\\w+\\.py$</div></td></tr><tr><td><div>^appadmin/insert/\\w+\\.py$</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">postprocessing</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_client</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_compression_level</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_expires</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_key</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_data_name</td><td style="vertical-align:top;">:</td><td><div>session_data_schedule</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_file</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py/applications/schedule/sessions/127.0.0.1-e017c707-74ae-4a95-a767-20ba875d3d1a&#x27;, mode &#x27;rb+&#x27; at 0x11a1d89c0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_filename</td><td style="vertical-align:top;">:</td><td><div>/Users/Abhinav/Documents/Hobbies &amp; Stuff/Computer/Shivam/web2py/applications/schedule/sessions/127.0.0.1-e017c707-74ae-4a95-a767-20ba875d3d1a</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_hash</td><td style="vertical-align:top;">:</td><td><div>0f4cf812d46a87cd38c8a2711c65f958</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id</td><td style="vertical-align:top;">:</td><td><div>127.0.0.1-e017c707-74ae-4a95-a767-20ba875d3d1a</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_name</td><td style="vertical-align:top;">:</td><td><div>session_id_schedule</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_locked</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_masterapp</td><td style="vertical-align:top;">:</td><td><div>schedule</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_new</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_storage_type</td><td style="vertical-align:top;">:</td><td><div>file</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">status</td><td style="vertical-align:top;">:</td><td><div>200</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">view</td><td style="vertical-align:top;">:</td><td><div>appadmin/insert.html</div></td></tr></table></div>'
+tRp491
+sS'locals'
+p492
+(dp493
+S'exc'
+p494
+S'ProgrammingError(\'ERROR\', \'42701\', \'column "entry" of relation "auth_user" already exists\')'
+p495
+sS'msg_class'
+p496
+S"<class 'gluon.contrib.pg8000.protocol.ReadyForQuery'>"
+p497
+sS'self'
+p498
+S'<gluon.contrib.pg8000.protocol.MessageReader object>'
+p499
+sg46
+S'()'
+p500
+sS'handler'
+p501
+S'<function <lambda>>'
+p502
+sS'kwargs'
+p503
+g21
+sS'msg'
+p504
+S'<ReadyForQuery Idle in Failed Transaction>'
+p505
+sS'msg_handled'
+p506
+S'True'
+p507
+sS'retval'
+p508
+S'1'
+sssS'traceback'
+p509
+S'Traceback (most recent call last):\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/restricted.py", line 220, in restricted\n    exec ccode in environment\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/applications/schedule/models/db.py", line 54, in <module>\n    auth.define_tables(username=False, signature=False)\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/tools.py", line 1784, in define_tables\n    format=\'%(first_name)s %(last_name)s (%(id)s)\'))\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/dal.py", line 8223, in define_table\n    table = self.lazy_define_table(tablename,*fields,**args)\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/dal.py", line 8260, in lazy_define_table\n    polymodel=polymodel)\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/dal.py", line 1132, in create_table\n    fake_migrate=fake_migrate\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/dal.py", line 1245, in migrate_table\n    self.execute(sub_query)\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/dal.py", line 1969, in execute\n    return self.log_execute(*a, **b)\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/dal.py", line 1963, in log_execute\n    ret = self.cursor.execute(command, *a[1:], **b)\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/dbapi.py", line 246, in _fn\n    return fn(self, *args, **kwargs)\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/dbapi.py", line 317, in execute\n    self._execute(operation, args)\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/dbapi.py", line 322, in _execute\n    self.cursor.execute(new_query, *new_args)\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/interface.py", line 399, in execute\n    self._stmt.execute(*args, **kwargs)\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/interface.py", line 169, in execute\n    self._row_desc, cmd = self.c.bind(self._portal_name, self._statement_name, args, self._parse_row_desc, kwargs.get("stream"))\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/protocol.py", line 943, in _fn\n    return fn(self, *args, **kwargs)\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/protocol.py", line 1142, in bind\n    return reader.handle_messages()\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/protocol.py", line 911, in handle_messages\n    retval = handler(msg, *args, **kwargs)\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/protocol.py", line 1181, in _bind_nodata\n    reader.handle_messages()\n  File "/Users/Abhinav/Documents/Hobbies & Stuff/Computer/Shivam/web2py/gluon/contrib/pg8000/protocol.py", line 916, in handle_messages\n    raise exc\nProgrammingError: (\'ERROR\', \'42701\', \'column "entry" of relation "auth_user" already exists\')\n'
+p510
+s.
